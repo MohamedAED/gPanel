@@ -31,7 +31,13 @@ public class GPanelService {
         if (labels.isEmpty()) {
             return Collections.emptyList();
         }
-        return labels.stream().map(label -> new LabelDTO(label.getId(), label.getName())).collect(Collectors.toList());
+        return labels.stream().map(
+                label -> LabelDTO.builder().
+                        id(label.getId()).
+                        name(label.getName()).
+                        type(label.getType())
+                        .build()
+        ).collect(Collectors.toList());
     }
 
 }

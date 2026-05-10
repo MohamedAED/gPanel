@@ -13,5 +13,6 @@ public class LabelDTO {
 
     private String id;
     private String name;
+    private String type;
 
 }

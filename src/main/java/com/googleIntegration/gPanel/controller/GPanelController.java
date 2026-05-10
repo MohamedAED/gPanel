@@ -3,7 +3,6 @@ package com.googleIntegration.gPanel.controller;
 import com.googleIntegration.gPanel.dto.LabelDTO;
 import com.googleIntegration.gPanel.service.GPanelService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +22,11 @@ public class GPanelController {
         this.GPanelService = GPanelService;
     }
 
+    @GetMapping("/")
+    public ResponseEntity getAllLabels() {
+        return ResponseEntity.ok("gPanel App");
+    }
+
     @GetMapping("/labels")
     public ResponseEntity<List<LabelDTO>> printGmailLabels() throws IOException {
         List<LabelDTO> labelDTOList = GPanelService.getLabels();
@@ -31,6 +35,5 @@ public class GPanelController {
         }
         return ResponseEntity.ok(labelDTOList);
     }
-
 
 }
