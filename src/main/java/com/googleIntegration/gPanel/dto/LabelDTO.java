@@ -14,5 +14,7 @@ public class LabelDTO {
     private String id;
     private String name;
     private String type;
+    private String labelListVisibility;
+    private String messageListVisibility;
 
 }

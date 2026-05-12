@@ -40,4 +40,55 @@ public class GPanelService {
         ).collect(Collectors.toList());
     }
 
+    public LabelDTO getLabelById(String labelId) throws IOException {
+        Label label = gmailService.users().labels().get(USER, labelId).execute();
+
+        if (label == null) {
+            return null;
+        }
+        return LabelDTO.builder()
+                .id(label.getId())
+                .name(label.getName())
+                .type(label.getType())
+                .labelListVisibility(label.getLabelListVisibility())
+                .messageListVisibility(label.getMessageListVisibility())
+                .build();
+
+    }
+
+    public String create(LabelDTO labelDTO) throws IOException {
+        Label label = new Label()
+                .setName(labelDTO.getName())
+                .setLabelListVisibility("labelShow")
+                .setMessageListVisibility("show");
+
+        Label createdLabel = gmailService.users().labels().create(USER, label).execute();
+        if (createdLabel != null)
+            return createdLabel.getName();
+        return null;
+    }
+
+    public Boolean delete(String labelId) throws IOException {
+        try  {
+            gmailService.users().labels().delete(USER, labelId).execute();
+        }  catch (IOException ex) {
+            return false;
+        }
+        return true;
+    }
+
+    public String update (LabelDTO labelDTO) throws IOException {
+        Label updatedLabel = new Label()
+                .setId(labelDTO.getId())
+                .setName(labelDTO.getName())
+                .setLabelListVisibility("labelShow")
+                .setMessageListVisibility("show");
+
+        Label result = gmailService.users().labels().update(USER, labelDTO.getId(), updatedLabel).execute();
+
+        if (result != null)
+            return result.getName();
+        return null;
+
+    }
 }
