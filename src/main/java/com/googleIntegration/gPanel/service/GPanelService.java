@@ -68,7 +68,7 @@ public class GPanelService {
         return null;
     }
 
-    public Boolean delete(String labelId) throws IOException {
+    public Boolean delete(String labelId) {
         try  {
             gmailService.users().labels().delete(USER, labelId).execute();
         }  catch (IOException ex) {

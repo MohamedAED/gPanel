@@ -17,7 +17,6 @@ import org.springframework.core.io.ClassPathResource;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.security.GeneralSecurityException;
 import java.util.Collections;
 import java.util.List;
 
@@ -57,7 +56,7 @@ public class GmailConfig {
     }
 
     @Bean
-    public Gmail gmailService() throws GeneralSecurityException, IOException {
+    public Gmail gmailService() throws IOException {
          return new Gmail.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCredentials())
                 .setApplicationName(APPLICATION_NAME)
                 .build();
